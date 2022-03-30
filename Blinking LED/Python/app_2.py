@@ -15,7 +15,7 @@ p.start(light)
 try:
     while True:
         if light in [0, 100]:
-            step = step * (-1)
+            step *= -1
         light += step
         p.ChangeDutyCycle(light)
         time.sleep(1)
