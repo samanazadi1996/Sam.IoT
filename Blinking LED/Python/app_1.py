@@ -8,8 +8,8 @@ GPIO.setup(pin, GPIO.OUT)
 on = True
 
 try:
+    print('Blinking LED. Press Ctrl+C to end.')
     while True:
-        print(f'led {on}')
         time.sleep(1)
         GPIO.output(pin, int(on))
         on = not on

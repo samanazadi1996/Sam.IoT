@@ -13,6 +13,7 @@ p = GPIO.PWM(pin, 100)
 p.start(light)
 
 try:
+    print('Blinking LED. Press Ctrl+C to end.')
     while True:
         if light in [0, 100]:
             step *= -1
