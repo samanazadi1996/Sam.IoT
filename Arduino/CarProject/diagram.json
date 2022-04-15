@@ -1,0 +1,256 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": 60.67,
+      "left": -70.67,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-stepper-motor",
+      "id": "stepper1",
+      "top": -69.25,
+      "left": 346.75,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-a4988",
+      "id": "drv1",
+      "top": 19.11,
+      "left": 250.38,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-analog-joystick",
+      "id": "joystick1",
+      "top": 69.55,
+      "left": -221.04,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo1",
+      "top": -124.33,
+      "left": -30.99,
+      "rotate": -90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -103.47,
+      "left": 125.65,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -28.74,
+      "left": 119.52,
+      "rotate": 90,
+      "attrs": {
+        "value": "1000"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "drv1:GND.1",
+      "uno:GND.3",
+      "black",
+      [
+        "v12.95",
+        "h-206.96"
+      ]
+    ],
+    [
+      "stepper1:B-",
+      "drv1:1B",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "stepper1:B+",
+      "drv1:1A",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "stepper1:A+",
+      "drv1:2A",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "stepper1:A-",
+      "drv1:2B",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "drv1:DIR",
+      "uno:2",
+      "green",
+      [
+        "h0"
+      ]
+    ],
+    [
+      "uno:3",
+      "drv1:STEP",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "drv1:SLEEP",
+      "drv1:RESET",
+      "green",
+      [
+        "h-22.85",
+        "v-1.3"
+      ]
+    ],
+    [
+      "drv1:VDD",
+      "drv1:VMOT",
+      "green",
+      [
+        "h18.16",
+        "v-57.19"
+      ]
+    ],
+    [
+      "drv1:GND.2",
+      "drv1:GND.1",
+      "black",
+      [
+        "h30.53",
+        "v0.86"
+      ]
+    ],
+    [
+      "joystick1:GND",
+      "uno:GND.3",
+      "black",
+      [
+        "v90.18",
+        "h257.07"
+      ]
+    ],
+    [
+      "joystick1:HORZ",
+      "uno:A0",
+      "green",
+      [
+        "v115.21",
+        "h294.58"
+      ]
+    ],
+    [
+      "uno:A1",
+      "joystick1:VERT",
+      "green",
+      [
+        "v57.54",
+        "h-333.56"
+      ]
+    ],
+    [
+      "uno:5",
+      "joystick1:VCC",
+      "green",
+      [
+        "v134.27",
+        "h-333.24"
+      ]
+    ],
+    [
+      "servo1:GND",
+      "uno:GND.1",
+      "black",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "servo1:V+",
+      "uno:3.3V",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "servo1:PWM",
+      "uno:9",
+      "green",
+      [
+        "v4.26",
+        "h28.39"
+      ]
+    ],
+    [
+      "led2:A",
+      "r1:1",
+      "green",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "uno:5V",
+      "drv1:VDD",
+      "red",
+      [
+        "v17.31",
+        "h185.12",
+        "v-198.51"
+      ]
+    ],
+    [
+      "uno:5V",
+      "joystick1:SEL",
+      "red",
+      [
+        "v35.88",
+        "h-246.73"
+      ]
+    ],
+    [
+      "uno:GND.1",
+      "led2:C",
+      "black",
+      [
+        "v-23.54",
+        "h98.79"
+      ]
+    ],
+    [
+      "r1:2",
+      "uno:7",
+      "red",
+      [
+        "h-0.36",
+        "v40.33",
+        "h-33.8"
+      ]
+    ]
+  ]
+}
