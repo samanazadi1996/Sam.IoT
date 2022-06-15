@@ -1,0 +1,42 @@
+{
+    "version": 1,
+    "author": "Uri Shaked",
+    "editor": "wokwi",
+    "parts": [{
+            "type": "wokwi-arduino-uno",
+            "id": "uno",
+            "top": 177.33,
+            "left": 20,
+            "attrs": {}
+        },
+        {
+            "type": "wokwi-buzzer",
+            "id": "buzzer",
+            "top": 16,
+            "left": 124,
+            "attrs": {
+                "volume": "0.1"
+            }
+        }
+    ],
+    "connections": [
+        [
+            "uno:GND.1",
+            "buzzer:1",
+            "black", [
+                "v-12",
+                "*",
+                "h0"
+            ]
+        ],
+        [
+            "uno:8",
+            "buzzer:2",
+            "red", [
+                "v-32",
+                "*",
+                "h0"
+            ]
+        ]
+    ]
+}
