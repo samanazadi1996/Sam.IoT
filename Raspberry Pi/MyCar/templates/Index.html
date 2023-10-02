@@ -129,8 +129,8 @@
       }
 
       setInterval(() => {
-        var x = draggableDiv.offsetLeft - 100;
-        var y = draggableDiv.offsetTop - 100;
+        var x = draggableDiv.offsetLeft - 25;
+        var y = draggableDiv.offsetTop - 25;
         var url = "/Ctrl?x=" + x + "&y=" + y;
         fetch(url)
           .then((response) => {
