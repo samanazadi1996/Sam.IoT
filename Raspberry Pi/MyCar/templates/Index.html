@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #draggable {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        border-radius: 50%;
+        background-color: red;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+      }
+      #div-body {
+        width: 200px;
+        height: 200px;
+        background-color: bisque;
+        border-radius: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div-body">
+      <div id="draggable"></div>
+    </div>
+    <script>
+      var draggableDiv = document.getElementById("draggable");
+      var divBody = document.getElementById("div-body");
+      var mMove = false;
+      var offsetX = 0;
+      var offsetY = 0;
+
+      draggableDiv.addEventListener("mousedown", onMouseDown);
+      draggableDiv.addEventListener("touchstart", onTouchStart);
+
+      function onMouseDown(e) {
+        mMove = true;
+        offsetX = e.clientX - draggableDiv.getBoundingClientRect().left;
+        offsetY = e.clientY - draggableDiv.getBoundingClientRect().top;
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+      }
+
+      function onTouchStart(e) {
+        mMove = true;
+        var touch = e.touches[0];
+        offsetX = touch.clientX - draggableDiv.getBoundingClientRect().left;
+        offsetY = touch.clientY - draggableDiv.getBoundingClientRect().top;
+        e.preventDefault(); // Prevent pull-to-refresh behavior on touch devices
+
+        document.addEventListener("touchmove", onTouchMove);
+        document.addEventListener("touchend", onTouchEnd);
+      }
+
+      function onMouseMove(e) {
+        if (mMove) {
+          var x = e.clientX - offsetX - divBody.getBoundingClientRect().left;
+          var y = e.clientY - offsetY - divBody.getBoundingClientRect().top;
+
+          // Ensure the draggable element stays within the boundaries of divBody
+          x =
+            Math.max(
+              0,
+              Math.min(x, divBody.offsetWidth - draggableDiv.offsetWidth)
+            ) + 25;
+          y =
+            Math.max(
+              0,
+              Math.min(y, divBody.offsetHeight - draggableDiv.offsetHeight)
+            ) + 25;
+
+          draggableDiv.style.top = y + "px";
+          draggableDiv.style.left = x + "px";
+        } else {
+          reset();
+        }      }
+
+      function onTouchMove(e) {
+        if (mMove) {
+          var touch = e.touches[0];
+          var x =
+            touch.clientX - offsetX - divBody.getBoundingClientRect().left;
+          var y = touch.clientY - offsetY - divBody.getBoundingClientRect().top;
+
+          // Ensure the draggable element stays within the boundaries of divBody
+          x =
+            Math.max(
+              0,
+              Math.min(x, divBody.offsetWidth - draggableDiv.offsetWidth)
+            ) + 25;
+          y =
+            Math.max(
+              0,
+              Math.min(y, divBody.offsetHeight - draggableDiv.offsetHeight)
+            ) + 25;
+
+          draggableDiv.style.top = y + "px";
+          draggableDiv.style.left = x + "px";
+        }
+      }
+
+      function onMouseUp() {
+        reset();
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+      }
+
+      function onTouchEnd() {
+        reset();
+        document.removeEventListener("touchmove", onTouchMove);
+        document.removeEventListener("touchend", onTouchEnd);
+      }
+
+      function reset() {
+        mMove = false;
+        offsetX = 0;
+        offsetY = 0;
+        draggableDiv.style.top = "";
+        draggableDiv.style.left = "";
+      }
+
+      setInterval(() => {
+        var x = draggableDiv.offsetLeft - 100;
+        var y = draggableDiv.offsetTop - 100;
+        var url = "/Ctrl?x=" + x + "&y=" + y;
+        fetch(url)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+          })
+          .then((data) => {
+            document.getElementById("info").innerHTML =
+              "Author : " + data.Author;
+          });
+      }, 500);
+    </script>
+  </body>
+</html>
